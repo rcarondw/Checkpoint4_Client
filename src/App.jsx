@@ -6,7 +6,7 @@ import Layout from "../components/Layout";
 
 function App() {
   return (
-    <div className="w-full h-screen bg-black">
+    <div className="w-full h-screen bg-homeDark">
       <NavBar />
       <div>
         <Layout />

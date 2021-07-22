@@ -1,0 +1,6 @@
+@import "slick-carousel/slick/slick.css";
+@import "slick-carousel/slick/slick-theme.css";
+
+.stroke {
+  -webkit-text-stroke: 1px black;
+}

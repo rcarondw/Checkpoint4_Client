@@ -4,93 +4,212 @@ import { useSelector } from "react-redux";
 const allPic = [
   {
     name: "estelle",
-    pic_url: "images/estelle.png",
-  },
-  {
-    name: "joseph",
-    pic_url: "images/joseph.png",
-  },
-  {
-    name: "julien",
-    pic_url: "images/julien1.png",
-  },
-  {
-    name: "julien2",
-    pic_url: "images/julien2.png",
-  },
-  {
-    name: "julien3",
-    pic_url: "images/julien3.png",
-  },
-  {
-    name: "julien4",
-    pic_url: "images/julien4.png",
-  },
-  {
-    name: "julien5",
-    pic_url: "images/julien5.png",
-  },
-  {
-    name: "matthias",
-    pic_url: "images/matthias.png",
-  },
-  {
-    name: "matthieu",
-    pic_url: "images/matthieu.png",
-  },
-  {
-    name: "matthieu2",
-    pic_url: "images/matthieu2.png",
+    pic_url: "images/estelle.jpg",
   },
   {
     name: "estelle2",
-    pic_url: "images/estelle2.png",
+    pic_url: "images/estelle2.jpg",
+  },
+  {
+    name: "estelle3",
+    pic_url: "images/estelle3.jpg",
+  },
+  {
+    name: "estelle4",
+    pic_url: "images/estelle4.jpg",
+  },
+  {
+    name: "estelle5",
+    pic_url: "images/estelle5.jpg",
+  },
+  {
+    name: "joseph",
+    pic_url: "images/joseph.jpg",
+  },
+  {
+    name: "joseph2",
+    pic_url: "images/joseph2.jpg",
+  },
+  {
+    name: "joseph3",
+    pic_url: "images/joseph3.jpg",
+  },
+  {
+    name: "julien",
+    pic_url: "images/julien.jpg",
+  },
+  {
+    name: "julien2",
+    pic_url: "images/julien2.jpg",
+  },
+  {
+    name: "julien3",
+    pic_url: "images/julien3.jpg",
+  },
+  {
+    name: "julien4",
+    pic_url: "images/julien4.jpg",
+  },
+  {
+    name: "julien5",
+    pic_url: "images/julien5.jpg",
+  },
+  {
+    name: "julien6",
+    pic_url: "images/julien6.jpg",
+  },
+  {
+    name: "julien7",
+    pic_url: "images/julien7.jpg",
+  },
+  {
+    name: "matthias",
+    pic_url: "images/matthias.jpg",
+  },
+  {
+    name: "mathias",
+    pic_url: "images/mathias.jpg",
+  },
+  {
+    name: "mathias2",
+    pic_url: "images/mathias2.jpg",
+  },
+  {
+    name: "mathias3",
+    pic_url: "images/mathias3.png",
+  },
+  {
+    name: "mathias4",
+    pic_url: "images/mathias4.jpg",
+  },
+  {
+    name: "matthieu",
+    pic_url: "images/matthieu.jpg",
+  },
+  {
+    name: "matthieu2",
+    pic_url: "images/matthieu2.jpg",
+  },
+  {
+    name: "matthieu3",
+    pic_url: "images/matthieu3.jpg",
+  },
+  {
+    name: "matthieu4",
+    pic_url: "images/matthieu4.jpg",
   },
   {
     name: "marylou",
-    pic_url: "images/marylou.png",
+    pic_url: "images/marylou.jpg",
+  },
+  {
+    name: "marylou2",
+    pic_url: "images/marylou2.jpg",
+  },
+  {
+    name: "marylou3",
+    pic_url: "images/marylou3.jpg",
+  },
+  {
+    name: "remi",
+    pic_url: "images/remi.png",
+  },
+  {
+    name: "remi2",
+    pic_url: "images/remi2.png",
+  },
+  {
+    name: "remi3",
+    pic_url: "images/remi3.png",
+  },
+  {
+    name: "thomas",
+    pic_url: "images/thomas.jpg",
+  },
+  {
+    name: "thomas2",
+    pic_url: "images/thomas2.jpg",
+  },
+  {
+    name: "thomas3",
+    pic_url: "images/thomas3.jpg",
+  },
+  {
+    name: "victoria",
+    pic_url: "images/victoria.jpg",
+  },
+  {
+    name: "victoria2",
+    pic_url: "images/victoria2.jpg",
   },
 ];
 
 export default function Allpic() {
-  const [mainPic, setMainPic] = useState("images/estelle.png");
+  const [mainPic, setMainPic] = useState("images/estelle.jpg");
+  const [searchTemplate, setSearchTemplate] = useState("");
 
   const upperText = useSelector((state) => state.upperText);
   const lowerText = useSelector((state) => state.lowerText);
   const colorPickUp = useSelector((state) => state.colorPick);
   const colorPickBot = useSelector((state) => state.colorPickBot);
 
+  const handleFilter = () => {
+    allPic.filter;
+  };
+
   return (
-    <div className="flex flex-col items-center">
-      <div className="m-4 relative">
+    <div className="flex flex-col items-center h-full w-full justify-between">
+      <div className="relative h-1/2 w-full flex justify-start px-10 pt-10 ">
         <p
-          className="h-14 absolute text-3xl font-bold w-full text-center flex justify-center items-center"
+          className="h-14 absolute text-3xl font-bold w-10/12 text-center flex  justify-center items-center"
           style={{ color: colorPickUp }}
         >
           {upperText}
         </p>
-        <img src={mainPic} className="w-full h-1/2  " />
+        <img src={mainPic} className="w-full rounded-md object-fill " />
         <p
-          className=" h-14 absolute text-3xl font-bold bottom-0 w-full flex justify-center items-center"
+          className=" h-14 absolute text-3xl font-bold text-center px-7 bottom-0 w-10/12 flex justify-center items-center"
           style={{ color: colorPickBot }}
         >
           {lowerText}
         </p>
       </div>
-      <div className="flex flex-col items-center mt-4">
-        <h3 className="text-white">All template</h3>
-        <div className="grid grid-cols-4 gap-2 mx-4">
-          {allPic.map((pic, idx) => {
-            return (
-              <div key={idx}>
-                <img
-                  src={pic.pic_url}
-                  alt={pic.name}
-                  onClick={(e) => setMainPic(pic.pic_url)}
-                />
-              </div>
-            );
-          })}
+      <div className="flex flex-col items-center h-1/2 justify-center w-full px-3">
+        <div className="w-full px-6  mb-4 flex justify-between items-center">
+          <h3 className="text-white text-2xl font-bold">All template</h3>
+          <input
+            type="text"
+            name="searchInput"
+            placeholder="search template"
+            onChange={(e) => setSearchTemplate(e.target.value)}
+            className="text-sm rounded-lg p-2"
+          />
+        </div>
+        <div className="grid grid-cols-4 gap-2 mx-4 mt-4 h-44 overflow-auto">
+          {allPic
+            .filter((word) => {
+              if (searchTemplate === "") {
+                return word;
+              } else if (
+                word.name
+                  .toLocaleLowerCase()
+                  .includes(searchTemplate.toLocaleLowerCase())
+              ) {
+                return word;
+              }
+            })
+            .map((pic, idx) => {
+              return (
+                <div key={idx} className="">
+                  <img
+                    src={pic.pic_url}
+                    alt={pic.name}
+                    onClick={(e) => setMainPic(pic.pic_url)}
+                    className="rounded-md object-fill"
+                  />
+                </div>
+              );
+            })}
         </div>
       </div>
     </div>
