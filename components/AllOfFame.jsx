@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import Slider from "react-slick";
-import { BsChevronCompactRight, BsChevronCompactLeft } from "react-icons/bs";
+import { useDispatch } from "react-redux";
+import { AOFChange, AOFPicChange } from "../src/actions";
 
 const allOfFame = [
   {
@@ -182,54 +182,20 @@ const allOfFame = [
 ];
 
 export default function AllOfFame() {
-  const [imageIdx, setImageIdx] = useState(0);
-
-  function NextArrow({ onClick }) {
-    return (
-      <div className=" absolute -right-24 z-10 ">
-        <button onClick={onClick} className="focus:outline-none">
-          <BsChevronCompactRight className="w-20 h-20 text-gray-500 top-1/2" />
-        </button>
-      </div>
-    );
-  }
-
-  function PrevArrow({ onClick }) {
-    return (
-      <div className="absolute -left-24 z-10">
-        <button onClick={onClick} className="focus:outline-none">
-          <BsChevronCompactLeft className="w-20 h-20 text-gray-500 top-1/2 " />
-        </button>
-      </div>
-    );
-  }
-
-  const settings = {
-    Infinite: true,
-    lazyload: true,
-    slideToShow: 4,
-    centerMode: true,
-    centerPadding: 0,
-    nextArrow: <NextArrow />,
-    prevArrow: <PrevArrow />,
-    beforeChange:(current, next) => setImageIdx(next)
-  };
+  const dispatch = useDispatch()
 
   return (
-    <div className="w-96 h-48 bg-pink-500">
-      <h3>All Of Fame</h3>
-      <Slider
-        {...settings}
-        className="max-w-full max-h-full flex justify-center items-center"
-      > 
-        {allOfFame.map((pic, idx) => {
-          return (
-            <div key={idx} className="relative">
-              <img src={pic.pic_url} alt={pic.name} className="w-48" />
-            </div>
-          );
-        })}
-      </Slider>
+    <div className="w-full h-full p-10">
+      <h3 className="text-white text-center mb-4 font-bold text-2xl ">All Of Fame</h3>
+      <div className="grid grid-cols-3 overflow-y-auto w-full h-full ">
+      {allOfFame.map((pic, idx) => {
+        return(
+          <div key={idx} className=" w-full h-full" onClick={(e) => dispatch(AOFPicChange(pic.pic_url))} >
+            <img src={pic.pic_url} alt={pic.name} className="object-cover" onClick={() => dispatch(AOFChange())}  />
+          </div>
+        )
+      })}
+      </div>
     </div>
   );
 }

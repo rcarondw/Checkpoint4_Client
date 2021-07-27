@@ -6,7 +6,6 @@ import {
   colorChangeUp,
   colorChangeBot,
 } from "../src/actions";
-import AllOfFame from "./AllOfFame";
 
 export default function Settings() {
   const upperText = useSelector((state) => state.upperText);
@@ -34,7 +33,7 @@ export default function Settings() {
             onChange={(e) => {
               dispatch(colorChangeUp(e.target.value));
             }}
-            className="w-10 h-8 rounded-md"
+            className="w-10 h-8 rounded-l-md"
           />
           <input
             type="text"
@@ -62,7 +61,7 @@ export default function Settings() {
           onChange={(e) => {
             dispatch(colorChangeBot(e.target.value));
           }}
-          className="w-10 h-8 rounded-md"
+          className="w-10 h-8 rounded-l-md"
         />
         <input
           type="text"

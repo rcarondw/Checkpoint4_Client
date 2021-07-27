@@ -25,3 +25,16 @@ export const colorChangeBot = (data) => {
       payload: data,
     };
   };
+
+  export const AOFChange = () => {
+    return{
+      type: 'AOF_CLICK',
+    };
+  };
+
+  export const AOFPicChange = (data) => {
+    return{
+      type: 'SELECTED_PIC',
+      payload: data
+    };
+  };
