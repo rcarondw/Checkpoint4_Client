@@ -1,10 +1,16 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
+import domtoimage from "dom-to-image";
+import Upload from "./Upload";
 
 const allPic = [
   {
     name: "estelle",
     pic_url: "images/estelle.jpg",
+  },
+  {
+    name: "Drake Hotline",
+    pic_url: "https://imgflip.com/s/meme/Drake-Hotline-Bling.jpg",
   },
   {
     name: "estelle2",
@@ -147,35 +153,59 @@ const allPic = [
 export default function Allpic() {
   const [mainPic, setMainPic] = useState("images/estelle.jpg");
   const [searchTemplate, setSearchTemplate] = useState("");
-
   const upperText = useSelector((state) => state.upperText);
   const lowerText = useSelector((state) => state.lowerText);
   const colorPickUp = useSelector((state) => state.colorPick);
   const colorPickBot = useSelector((state) => state.colorPickBot);
+  const [preview, setPreview] = useState();
 
-  const handleFilter = () => {
-    allPic.filter;
+  // let thisImage = document.getElementById("image");
+
+  const imgLink = () => {
+    domtoimage
+      .toJpeg(document.getElementById("image"), { quality: 0.95 })
+      .then(function (dataUrl) {
+        var link = document.createElement("a");
+        link.download = "my-image-name.jpeg";
+        link.href = dataUrl;
+        link.click();
+      });
   };
 
   return (
-    <div className="flex flex-col items-center h-full w-full justify-between">
-      <div className="relative h-1/2 w-full flex justify-start px-10 pt-10 ">
-        <p
-          className="h-14 absolute text-3xl font-bold w-10/12 text-center flex  justify-center items-center"
-          style={{ color: colorPickUp }}
+    <div className="flex flex-col items-center h-full w-full justify-between p-6">
+      <div className="w-full flex justify-around">
+        <Upload setPreview={setPreview} setMainPic={setMainPic} />
+        <button
+          type="button"
+          className="bg-white px-6 py-1 rounded-lg"
+          onClick={imgLink}
         >
-          {upperText}
-        </p>
-        <img src={mainPic} className="w-full rounded-md object-fill " />
-        <p
-          className=" h-14 absolute text-3xl font-bold text-center px-7 bottom-0 w-10/12 flex justify-center items-center"
-          style={{ color: colorPickBot }}
-        >
-          {lowerText}
-        </p>
+          Generate
+        </button>
+      </div>
+      <div className=" h-1/2 w-full flex justify-center py-10 px-36 ">
+        <div id="image" className="relative w-full full">
+          <p
+            className="h-14 absolute top-5 w-full text-center flex justify-center items-center stroke uppercase"
+            style={{ color: colorPickUp }}
+          >
+            {upperText}
+          </p>
+          <img
+            src={mainPic ? mainPic : preview}
+            className="w-full h-full rounded-md object-fill "
+          />
+          <p
+            className=" h-14 absolute  text-center  bottom-5 w-full flex justify-center items-center stroke uppercase"
+            style={{ color: colorPickBot }}
+          >
+            {lowerText}
+          </p>
+        </div>
       </div>
       <div className="flex flex-col items-center h-1/2 justify-center w-full px-3">
-        <div className="w-full px-6  mb-4 flex justify-between items-center">
+        <div className="w-full px-6  mb-4 flex justify-between items-center relative">
           <h3 className="text-white text-2xl font-bold">All template</h3>
           <input
             type="text"
@@ -185,7 +215,7 @@ export default function Allpic() {
             className="text-sm rounded-lg p-2"
           />
         </div>
-        <div className="grid grid-cols-4 gap-2 mx-4 mt-4 h-44 overflow-auto">
+        <div className="grid grid-cols-4 gap-2  h-4/5 overflow-y-scroll">
           {allPic
             .filter((word) => {
               if (searchTemplate === "") {
@@ -205,7 +235,7 @@ export default function Allpic() {
                     src={pic.pic_url}
                     alt={pic.name}
                     onClick={(e) => setMainPic(pic.pic_url)}
-                    className="rounded-md object-fill"
+                    className="rounded-sm object-fill"
                   />
                 </div>
               );

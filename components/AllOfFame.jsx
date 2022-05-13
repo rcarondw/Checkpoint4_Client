@@ -182,19 +182,30 @@ const allOfFame = [
 ];
 
 export default function AllOfFame() {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   return (
     <div className="w-full h-full p-10">
-      <h3 className="text-white text-center mb-4 font-bold text-2xl ">All Of Fame</h3>
-      <div className="grid grid-cols-3 overflow-y-auto w-full h-full ">
-      {allOfFame.map((pic, idx) => {
-        return(
-          <div key={idx} className=" w-full h-full" onClick={(e) => dispatch(AOFPicChange(pic.pic_url))} >
-            <img src={pic.pic_url} alt={pic.name} className="object-cover" onClick={() => dispatch(AOFChange())}  />
-          </div>
-        )
-      })}
+      <h3 className="text-white text-center font-bold text-2xl py-2">
+        All Of Fame
+      </h3>
+      <div className="grid grid-cols-3 gap-1 object-fill overflow-y-auto w-full h-full ">
+        {allOfFame.map((pic, idx) => {
+          return (
+            <div
+              key={idx}
+              className=" w-full h-full"
+              onClick={(e) => dispatch(AOFPicChange(pic.pic_url))}
+            >
+              <img
+                src={pic.pic_url}
+                alt={pic.name}
+                className="w-full h-full object-cover max-h-24"
+                onClick={() => dispatch(AOFChange())}
+              />
+            </div>
+          );
+        })}
       </div>
     </div>
   );

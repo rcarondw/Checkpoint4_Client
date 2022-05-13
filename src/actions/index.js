@@ -20,21 +20,28 @@ export const colorChangeUp = (data) => {
 };
 
 export const colorChangeBot = (data) => {
-    return {
-      type: "COLOR_PICK_BOT",
-      payload: data,
-    };
+  return {
+    type: "COLOR_PICK_BOT",
+    payload: data,
   };
+};
 
-  export const AOFChange = () => {
-    return{
-      type: 'AOF_CLICK',
-    };
+export const AOFChange = () => {
+  return {
+    type: "AOF_CLICK",
   };
+};
 
-  export const AOFPicChange = (data) => {
-    return{
-      type: 'SELECTED_PIC',
-      payload: data
-    };
+export const AOFPicChange = (data) => {
+  return {
+    type: "SELECTED_PIC",
+    payload: data,
   };
+};
+
+export const mainPicAction = (data) => {
+  return {
+    type: "MAIN_PIC_CHANGE",
+    payload: data,
+  };
+};

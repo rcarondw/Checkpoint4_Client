@@ -1,6 +1,36 @@
 @import "slick-carousel/slick/slick.css";
 @import "slick-carousel/slick/slick-theme.css";
+@font-face {
+  font-family: impact;
+  src: url(./font/Impact-Font/impact.ttf) format("truetype");
+}
 
 .stroke {
   -webkit-text-stroke: 1px black;
+}
+
+input[type="file"] {
+  display: none;
+}
+
+label {
+  color: black;
+  height: 1.9em;
+  width: 7em;
+  border-radius: 10px;
+  background-color: white;
+
+  margin: auto;
+
+  font-size: 17px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+p {
+  font-family: impact;
+  font-size: 3em;
+  font-weight: bolder;
+  letter-spacing: 2px;
 }
