@@ -45,3 +45,17 @@ export const mainPicAction = (data) => {
     payload: data,
   };
 };
+
+export const upperFontSize = (data) => {
+  return {
+    type: "UP_FONT_CHANGE",
+    payload: data,
+  };
+};
+
+export const bottomFontSize = (data) => {
+  return {
+    type: "BOT_FONT_CHANGE",
+    payload: data,
+  };
+};

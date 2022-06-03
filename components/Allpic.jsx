@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import domtoimage from "dom-to-image";
 import Upload from "./Upload";
+import { RiDragMoveFill } from "react-icons/ri";
 
 const allPic = [
   {
@@ -157,9 +158,10 @@ export default function Allpic() {
   const lowerText = useSelector((state) => state.lowerText);
   const colorPickUp = useSelector((state) => state.colorPick);
   const colorPickBot = useSelector((state) => state.colorPickBot);
+  const fontSizeTop = useSelector((state) => state.fontSizeTop);
   const [preview, setPreview] = useState();
-
-  // let thisImage = document.getElementById("image");
+  const [isResize, setIsResize] = useState(false);
+  const [isFocus, setIsFocus] = useState(false);
 
   const imgLink = () => {
     domtoimage
@@ -172,6 +174,91 @@ export default function Allpic() {
       });
   };
 
+  useEffect(() => {
+    const textArea = document.querySelector(".draggableDiv");
+    let isResizing = false;
+    function onDrag({ movementX, movementY }) {
+      if (!isResizing) {
+        let getStyle = window.getComputedStyle(textArea);
+        let left = parseInt(getStyle.left);
+        let top = parseInt(getStyle.top);
+
+        textArea.style.left = `${left + movementX}px`;
+        textArea.style.top = `${top + movementY}px`;
+      }
+    }
+
+    textArea.addEventListener("mousedown", () => {
+      textArea.addEventListener("mousemove", onDrag);
+    });
+    document.addEventListener("mouseup", () => {
+      textArea.removeEventListener("mousemove", onDrag);
+    });
+
+    const resizer = document.querySelector(".resizer");
+    resizer.addEventListener("mousedown", mousedown);
+
+    function mousedown(e) {
+      let currentResizer = e.target;
+      isResizing = true;
+      let prevX = e.clientX;
+      let prevY = e.clientY;
+      // let prevX = parseInt(getStyle.left);
+      // let prevY = parseInt(getStyle.top);
+
+      window.addEventListener("mousemove", mousemove);
+      window.addEventListener("mouseup", mouseup);
+
+      function mousemove(e) {
+        const rect = textArea.getBoundingClientRect();
+        if (currentResizer.classList.contains("se")) {
+          textArea.style.width = rect.width - (prevX - e.clientX) + "px";
+          textArea.style.height = rect.height - (prevY - e.clientY) + "px";
+        }
+        prevX = e.clientX;
+        prevY = e.clientY;
+      }
+
+      function mouseup(e) {
+        window.removeEventListener("mousemove", mousemove);
+        window.removeEventListener("mouseup", mouseup);
+        isResizing = false;
+      }
+    }
+  });
+
+  // useEffect(() => {
+  //   const el = document.querySelector(".draggableDiv");
+
+  //   el.addEventListener("mousedown", mousedown);
+
+  //   function mousedown(e) {
+  //     window.addEventListener("mousemove", mousemove);
+  //     window.addEventListener("mouseup", mouseup);
+
+  //     let prevX = e.clientX;
+  //     let prevY = e.clientY;
+
+  //     function mousemove(e) {
+  //       let newX = prevX - e.clientX;
+  //       let newY = prevY - e.clientY;
+
+  //       const rect = el.getBoundingClientRect();
+
+  //       el.style.left = rect.left - newX + "px";
+  //       el.style.top = rect.top - newY + "px";
+
+  //       prevX = e.clientX;
+  //       prevY = e.clientY;
+  //     }
+
+  //     function mouseup() {
+  //       window.removeEventListener("mousemove", mousemove);
+  //       window.removeEventListener("mouseup", mouseup);
+  //     }
+  //   }
+  // }, []);
+
   return (
     <div className="flex flex-col items-center h-full w-full justify-between p-6">
       <div className="w-full flex justify-around">
@@ -183,25 +270,47 @@ export default function Allpic() {
         >
           Generate
         </button>
+        <button
+          className="bg-white px-6 py-1 rounded-lg"
+          onClick={(e) => setIsResize(!isResize)}
+        >
+          on/off
+        </button>
       </div>
       <div className=" h-1/2 w-full flex justify-center py-10 px-36 ">
-        <div id="image" className="relative w-full full">
-          <p
-            className="h-14 absolute top-5 w-full text-center flex justify-center items-center stroke uppercase"
-            style={{ color: colorPickUp }}
-          >
-            {upperText}
-          </p>
+        <div id="image" className="relative w-full h-96 overflow-hidden">
+          <div className="absolute draggableDiv bg-green-400 w-48 h-24">
+            <div className="resizer n "></div>
+            <div className="resizer ne "></div>
+            <div className="resizer e "></div>
+            <div className="resizer se "></div>
+            <div className="resizer s "></div>
+            <div className="resizer so "></div>
+            <div className="resizer o "></div>
+            <div className="resizer no "></div>
+            <p
+              className="textArea flex flex-wrap stroke uppercase"
+              style={{ color: colorPickUp, fontSize: fontSizeTop }}
+            >
+              {upperText}
+            </p>
+            {/* <textarea
+              className="  bg-transparent text-center flex justify-center items-center stroke uppercase"
+              readOnly
+              style={{ color: colorPickUp, fontSize: fontSizeTop }}
+              value={upperText}
+            /> */}
+          </div>
           <img
             src={mainPic ? mainPic : preview}
             className="w-full h-full rounded-md object-fill "
           />
-          <p
+          {/* <p
             className=" h-14 absolute  text-center  bottom-5 w-full flex justify-center items-center stroke uppercase"
             style={{ color: colorPickBot }}
           >
             {lowerText}
-          </p>
+          </p> */}
         </div>
       </div>
       <div className="flex flex-col items-center h-1/2 justify-center w-full px-3">
@@ -215,7 +324,7 @@ export default function Allpic() {
             className="text-sm rounded-lg p-2"
           />
         </div>
-        <div className="grid grid-cols-4 gap-2  h-4/5 overflow-y-scroll">
+        <div className="grid grid-cols-4 gap-2  h-4/5 overflow-y-scroll hideScrollBar">
           {allPic
             .filter((word) => {
               if (searchTemplate === "") {
@@ -235,7 +344,7 @@ export default function Allpic() {
                     src={pic.pic_url}
                     alt={pic.name}
                     onClick={(e) => setMainPic(pic.pic_url)}
-                    className="rounded-sm object-fill"
+                    className="rounded-sm w-full h-full object-cover max-h-32"
                   />
                 </div>
               );

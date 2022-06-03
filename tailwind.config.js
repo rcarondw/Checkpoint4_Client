@@ -7,7 +7,7 @@ module.exports = {
         transparent: "transparent",
         current: "currentColor",
         homeGray: "#1D1D1D",
-        homeDark: "#0F0F0F"
+        homeDark: "#0F0F0F",
       },
     },
   },

@@ -189,7 +189,7 @@ export default function AllOfFame() {
       <h3 className="text-white text-center font-bold text-2xl py-2">
         All Of Fame
       </h3>
-      <div className="grid grid-cols-3 gap-1 object-fill overflow-y-auto w-full h-full ">
+      <div className="grid grid-cols-3 gap-1 object-fill overflow-y-auto w-full h-full hideScrollBar">
         {allOfFame.map((pic, idx) => {
           return (
             <div
@@ -200,7 +200,7 @@ export default function AllOfFame() {
               <img
                 src={pic.pic_url}
                 alt={pic.name}
-                className="w-full h-full object-cover max-h-24"
+                className="w-full h-full object-cover max-h-32"
                 onClick={() => dispatch(AOFChange())}
               />
             </div>

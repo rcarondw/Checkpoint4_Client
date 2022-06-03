@@ -30,7 +30,29 @@ label {
 
 p {
   font-family: impact;
-  font-size: 3em;
   font-weight: bolder;
   letter-spacing: 2px;
+}
+
+.hideScrollBar::-webkit-scrollbar {
+  display: none;
+}
+
+.textArea {
+  resize: both;
+}
+
+.resizer {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+  background-color: black;
+  z-index: 2;
+}
+
+.resizer.se {
+  bottom: -1px;
+  right: -1px;
+  cursor: se-resize;
 }
